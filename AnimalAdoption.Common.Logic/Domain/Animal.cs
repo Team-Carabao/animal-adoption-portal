@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AnimalAdoption.Common.Logic
+﻿namespace AnimalAdoption.Common.Logic
 {
     public class Animal
     {
