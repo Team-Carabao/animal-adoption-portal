@@ -1,10 +1,12 @@
+
 name: .NET Core
 
 #triggers
 on:
   push:
     branches: [ master ]
-
+env:
+  PROJECT: animal-adoption-portal
 
 jobs:
   build:
@@ -19,26 +21,35 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+        source-url: https://nuget.pkg.github.com/Team-Carabao/index.json
+      env: 
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
     - name: Install dependencies
       run: dotnet restore
     
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test ./AnimalAdoption.Web.Portal.UnitTests --no-restore --verbosity normal
+#     - name: Test
+#       run: dotnet test --no-restore --verbosity normal
 
     - name: Publish Portal
       run: dotnet publish ./AnimalAdoption.Web.Portal --configuration Release --no-restore -o ./portal
     
+    - name: Pack
+      run: dotnet pack ./AnimalAdoption.Common.Logic --configuration Release 
+    
+    - name: Push Package to NuGet
+      run: dotnet nuget push ./AnimalAdoption.Common.Logic/**/*.nupkg --skip-duplicate
+    
     - name: List out directory contents
       run: |
+          echo ${{ env.PROJECT }}
+          echo "hello world"
           echo "Listing the contents of the GitHub workspace directory"
           ls ${{ github.workspace }}
           echo "Listing Portal directory"
           ls ./portal
-          
-          echo "test hello world"
 
           echo "Recursively listing all contents of the current directory"
           ls -R
