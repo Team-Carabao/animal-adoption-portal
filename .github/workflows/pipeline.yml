@@ -65,6 +65,7 @@ jobs:
         if-no-files-found: error
         
   release:
+    needs: build
     #build agent
     runs-on: ubuntu-latest
 
