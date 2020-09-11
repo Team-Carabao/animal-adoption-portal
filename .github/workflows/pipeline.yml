@@ -37,6 +37,8 @@ jobs:
           ls ${{ github.workspace }}
           echo "Listing Portal directory"
           ls ./portal
+          
+          echo "test hello world"
 
           echo "Recursively listing all contents of the current directory"
           ls -R
