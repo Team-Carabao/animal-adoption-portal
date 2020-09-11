@@ -28,6 +28,9 @@ jobs:
 #     - name: Test
 #       run: dotnet test --no-restore --verbosity normal
 
+    - name: Publish Portal
+      run: dotnet publish ./AnimalAdoption.Web.Portal --configuration Release --no-restore -o ./portal
+      
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.1.4
       with:
