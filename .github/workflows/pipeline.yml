@@ -111,7 +111,7 @@ jobs:
         # Name of the azure key vault
         keyvault: overbreeze
         # Name of the secret to be fetched
-        secrets: GlobalPassword
+        secrets: 'GlobalPassword'
     
     - name: Azure App Service Settings
       uses: Azure/appservice-settings@v1
@@ -145,7 +145,7 @@ jobs:
             },
             {
               "name": "GlobalPassword",
-              "value": "${{env.GLOBALPASSWORD}}",
+              "value": "${{ env.GLOBALPASSWORD }}",
               "slotSetting": false
             },
             {
