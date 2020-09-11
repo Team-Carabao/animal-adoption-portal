@@ -71,6 +71,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Azure Login
+      uses: Azure/login@v1
+      with:
+        # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
+        creds: ${{secrets.DEVAPPSERVICE}} 
+        # Set this value to true to enable Azure PowerShell Login in addition to Az CLI login
+        # enable-AzPSSession: # optional     
+    
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2.0.5
       with:
@@ -85,7 +93,7 @@ jobs:
         # Name of the Azure Web App
         app-name: ${{env.devappname}}
         # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
-        publish-profile: ${{ secrets.OVERBREEZEPUBLISHPROFILE }}
+#         publish-profile: ${{ secrets.OVERBREEZEPUBLISHPROFILE }}
         # Enter an existing Slot other than the Production slot
         #slot-name: # optional, default is production
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
@@ -143,3 +151,4 @@ jobs:
 #         connection-strings-json: # optional
 #         # General configuration settings using dictionary syntax - Key Value pairs
 #         general-settings-json: # optional :  
+
