@@ -90,7 +90,7 @@ jobs:
       uses: Azure/webapps-deploy@v2
       with:
         # Name of the Azure Web App
-        app-name: ${{env.devappname}}
+        app-name: "${{ env.DEVAPPNAME }}"
         # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
 #         publish-profile: ${{ secrets.OVERBREEZEPUBLISHPROFILE }}
         # Enter an existing Slot other than the Production slot
@@ -109,10 +109,9 @@ jobs:
       uses: Azure/appservice-settings@v1
       with:
         # Name of the Azure Web App
-        app-name: ${{env.devappname}}
+        app-name: "${{ env.DEVAPPNAME }}"
         # Name of an existing slot other than the production slot. Default value is production
 #         slot-name: # optional
-# test
         # Application settings using the JSON syntax set as value of secret variable: APP_SETTINGS
         app-settings-json: |
           [
