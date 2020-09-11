@@ -139,7 +139,7 @@ jobs:
               "slotSetting": false
             }
             ]
-        # Connection Strings using the JSON syntax set as value of secret variable: CONNECTION_STRINGS
-        connection-strings-json: # optional
-        # General configuration settings using dictionary syntax - Key Value pairs
-        general-settings-json: # optional :  
+#         # Connection Strings using the JSON syntax set as value of secret variable: CONNECTION_STRINGS
+#         connection-strings-json: # optional
+#         # General configuration settings using dictionary syntax - Key Value pairs
+#         general-settings-json: # optional :  
