@@ -1,0 +1,42 @@
+name: .NET Core
+
+#triggers
+on:
+  push:
+    branches: [ master ]
+
+
+jobs:
+  build:
+    
+    #build agent
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2 # get the code from our repo
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Install dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+#     - name: Test
+#       run: dotnet test --no-restore --verbosity normal
+
+    - name: Publish Portal
+      run: dotnet publish ./AnimalAdoption.Web.Portal --configuration Release --no-restore -o ./portal
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        # Artifact name
+        name: portal
+        # A file, directory or wildcard pattern that describes what to upload
+        path: ./portal
+        # The desired behavior if no files are found using the provided path.
+        if-no-files-found: error
