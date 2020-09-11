@@ -36,6 +36,12 @@ jobs:
     - name: Publish Portal
       run: dotnet publish ./AnimalAdoption.Web.Portal --configuration Release --no-restore -o ./portal
     
+    - name: Pack
+      run: dotnet pack ./AnimalAdoption.Common.Logic --configuration Release 
+    
+    - name: Push Package to NuGet
+      run: dotnet nuget push ./AnimalAdoption.Common.Logic/**/*.nupkg --skip-duplicate
+    
     - name: List out directory contents
       run: |
           echo ${{ env.PROJECT }}
