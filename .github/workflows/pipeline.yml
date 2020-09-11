@@ -28,3 +28,12 @@ jobs:
 #     - name: Test
 #       run: dotnet test --no-restore --verbosity normal
 
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        # Artifact name
+        name: portal
+        # A file, directory or wildcard pattern that describes what to upload
+        path: ./portal
+        # The desired behavior if no files are found using the provided path.
+        if-no-files-found: error
