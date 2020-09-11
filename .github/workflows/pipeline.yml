@@ -145,7 +145,7 @@ jobs:
             },
             {
               "name": "GlobalPassword",
-              "value": "${{ env.GLOBALPASSWORD }}",
+              "value": "${{ env.GlobalPassword }}",
               "slotSetting": false
             },
             {
