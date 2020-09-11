@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 env:
   PROJECT: animal-adoption-portal
+  DEVAPPNAME: overbreeze
 
 jobs:
   build:
@@ -82,7 +83,7 @@ jobs:
       uses: Azure/webapps-deploy@v2
       with:
         # Name of the Azure Web App
-        app-name: overbreeze
+        app-name: ${{env.devappname}}
         # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
         publish-profile: ${{ secrets.OVERBREEZEPUBLISHPROFILE }}
         # Enter an existing Slot other than the Production slot
@@ -95,3 +96,50 @@ jobs:
         #configuration-file: # optional
         # Enter the start up command. For ex. dotnet run or dotnet run
         #startup-command: # optional
+            
+            
+    - name: Azure App Service Settings
+      uses: Azure/appservice-settings@v1
+      with:
+        # Name of the Azure Web App
+        app-name: ${{env.devappname}}
+        # Name of an existing slot other than the production slot. Default value is production
+#         slot-name: # optional
+        # Application settings using the JSON syntax set as value of secret variable: APP_SETTINGS
+        app-settings-json: |
+          [
+            {
+              "name": "ANCM_ADDITIONAL_ERROR_PAGE_LINK",
+              "value": "https://overbreeze.scm.azurewebsites.net/detectors?type=tools&name=eventviewer",
+              "slotSetting": false
+            },
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "${{secrets.DEVAPPINSIGHTKEY}}",
+              "slotSetting": false
+            },
+            {
+              "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+              "value": "InstrumentationKey=${{secrets.DEVAPPINSIGHTKEY}};IngestionEndpoint=https://eastasia-0.in.applicationinsights.azure.com/",
+              "slotSetting": false
+            },
+            {
+              "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+              "value": "~2",
+              "slotSetting": false
+            },
+            {
+              "name": "GlobalPassword",
+              "value": "${{secrets.GLOBALPASSWORD}}",
+              "slotSetting": false
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_Mode",
+              "value": "default",
+              "slotSetting": false
+            }
+            ]
+        # Connection Strings using the JSON syntax set as value of secret variable: CONNECTION_STRINGS
+        connection-strings-json: # optional
+        # General configuration settings using dictionary syntax - Key Value pairs
+        general-settings-json: # optional :  
