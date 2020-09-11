@@ -104,7 +104,15 @@ jobs:
         # Enter the start up command. For ex. dotnet run or dotnet run
         #startup-command: # optional
             #test
-            
+    
+    - name: Azure key vault - Get Secrets
+      uses: Azure/get-keyvault-secrets@v1
+      with:
+        # Name of the azure key vault
+        keyvault: overbreeze
+        # Name of the secret to be fetched
+        secrets: GlobalPassword
+    
     - name: Azure App Service Settings
       uses: Azure/appservice-settings@v1
       with:
@@ -137,7 +145,7 @@ jobs:
             },
             {
               "name": "GlobalPassword",
-              "value": "${{secrets.GLOBALPASSWORD}}",
+              "value": "${{env.GLOBALPASSWORD}}",
               "slotSetting": false
             },
             {
