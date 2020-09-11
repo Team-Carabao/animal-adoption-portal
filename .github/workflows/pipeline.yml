@@ -33,6 +33,7 @@ jobs:
     
     - name: List out directory contents
       run: |
+          echo "hello world"
           echo "Listing the contents of the GitHub workspace directory"
           ls ${{ github.workspace }}
           echo "Listing Portal directory"
