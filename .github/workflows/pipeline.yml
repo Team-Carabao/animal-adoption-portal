@@ -25,8 +25,8 @@ jobs:
     
     - name: Build
       run: dotnet build --configuration Release --no-restore
-#     - name: Test
-#       run: dotnet test --no-restore --verbosity normal
+    - name: Test
+      run: dotnet test ./AnimalAdoption.Web.Portal.UnitTests --no-restore --verbosity normal
 
     - name: Publish Portal
       run: dotnet publish ./AnimalAdoption.Web.Portal --configuration Release --no-restore -o ./portal
