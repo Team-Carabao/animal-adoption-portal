@@ -104,7 +104,7 @@ jobs:
         #configuration-file: # optional
         # Enter the start up command. For ex. dotnet run or dotnet run
         #startup-command: # optional
-            
+            #test
             
     - name: Azure App Service Settings
       uses: Azure/appservice-settings@v1
