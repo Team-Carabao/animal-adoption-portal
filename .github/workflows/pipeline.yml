@@ -30,7 +30,17 @@ jobs:
 
     - name: Publish Portal
       run: dotnet publish ./AnimalAdoption.Web.Portal --configuration Release --no-restore -o ./portal
-      
+    
+    - name: List out directory contents
+      run: |
+          echo "Listing the contents of the GitHub workspace directory"
+          ls ${{ github.workspace }}
+          echo "Listing Portal directory"
+          ls ./portal
+
+          echo "Recursively listing all contents of the current directory"
+          ls -R
+    
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.1.4
       with:
